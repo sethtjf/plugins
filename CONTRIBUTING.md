@@ -34,13 +34,13 @@ Each plugin lives in `plugins/<name>/` and has one entry in `.claude-plugin/mark
 
 5. **Add a row to the Plugins table in `README.md`:** name, description, and slash command (`/<name>:<skill>` for each skill).
 
-6. **Commit and open a PR.** When it merges to `main`, the `tag-releases` workflow creates a `<name>--v<version>` tag for the new plugin. You don't run `claude plugin tag` by hand. `validate.yml` has already checked that `plugin.json` and the marketplace entry agree.
+6. **Commit and open a PR.** When it merges to `main`, the `tag-releases` workflow creates a `<name>--v<version>` tag and a GitHub release for the new plugin. You don't run `claude plugin tag` by hand. `validate.yml` has already checked that `plugin.json` and the marketplace entry agree.
 
 ## Update a plugin
 
 1. Make the change under `plugins/<name>/`.
 2. **Bump `version` in `plugin.json`.** Installed users keep their cached copy until the version string changes, so an unbumped change never reaches them.
-3. Run `scripts/validate.sh`, update the README row if the description or commands changed, and commit. The merge to `main` tags the new version.
+3. Run `scripts/validate.sh`, update the README row if the description or commands changed, and commit. The merge to `main` tags and releases the new version.
 
 ## Rules the validator enforces
 
