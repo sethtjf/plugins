@@ -25,7 +25,7 @@ On Claude Code 2.1.275 or later, one command inside a session does both:
 | Plugin | Description | Slash command |
 | :- | :- | :- |
 | [`mcp-servers`](plugins/mcp-servers) | Audits an MCP server's source against a 48-check best-practices rubric. Returns a 0–100 score, a letter grade, and a located change list. | `/mcp-servers:audit [path]` |
-| [`workflow`](plugins/workflow) | Board open GitHub epics: what to close, finish, or start next, plus session briefs. | `/workflow:epics` |
+| [`workflow`](plugins/workflow) | Board open GitHub epics, and round up PRs, issues, and agent sessions into one land-and-launch plan. | `/workflow:epics`, `/workflow:roundup` |
 
 Plugin skills run as `/<plugin-name>:<skill-name>`.
 
