@@ -12,6 +12,8 @@ Skills for managing work in a GitHub repo from a coding-agent session. Each skil
 
 Boards every open epic, both labeled `epic` and epic-sized work without the label, and sorts each into occupied, close, finish, underway, blocked, start, or park. It recommends at most three next actions, with leftover children of an underway epic ranked ahead of new epics. It is read-only until you pick an option. Then it can write copy-paste first messages for new sessions, one per chosen epic.
 
+To check whether an epic is already in progress elsewhere, and to launch new sessions from the briefs, the skill first detects which agent backends the session can use: Devin through its MCP server, Claude Code cloud sessions, or a local subagent. It uses only those that pass a read check. Nothing launches without your approval, and copy-paste briefs are always offered. The detection rules and per-backend calls are in `skills/epics/references/BACKENDS.md`.
+
 Requirements: GitHub access through the GitHub MCP server or the `gh` CLI. The default labels are `epic`, `ready-for-agent`, and `ready-for-human`. If the repo uses other names, the skill maps them and says which mapping it used.
 
 ## Install

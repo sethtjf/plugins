@@ -31,6 +31,9 @@ this board, but it does not replace it.
 - **Verify commands**: read `AGENTS.md` / `CLAUDE.md` / `Justfile` /
   `package.json` for the repo's lint, typecheck, and test commands. Session
   briefs must quote the real commands, not placeholders.
+- **Backends**: detect which agent backends this session can search and launch
+  on, per [references/BACKENDS.md](references/BACKENDS.md). Record the one-line
+  result; later steps use only what it found.
 
 ## Gather (read-only)
 
@@ -51,9 +54,10 @@ has been empty in some agent environments even when labeled epics exist.
    - A `ready-for-human` HITL leftover of a large feat
    List these under **Unlabeled** — do not pretend they carry the epic label.
 4. **Occupied sessions.** User-stated "X is in another session" always wins.
-   If the runtime can list other agent sessions (Claude Code remote sessions,
-   Devin sessions, Cursor cloud agents), search them for epic numbers / titles.
-   Occupied epics are listed, never recommended as a new start.
+   Then search every available backend that can search sessions (the "Search
+   sessions" column in BACKENDS.md) for epic numbers / titles, and say which
+   backends were searched. Occupied epics are listed, never recommended as a
+   new start.
 5. **ADRs.** `ships-as:` (or equivalent) on ADRs that name the epic or its
    children — use them to explain blockers, not to invent work.
 
@@ -102,11 +106,13 @@ Rendered markdown, **no code fences**. Lead with the `★` recommendation.
 ---
 
 ## Epic board — YYYY-MM-DD · N labeled open · M unlabeled
+Backends: devin ✓ · claude-cloud ✗ (not connected) · local-subagent ✓
 
 **★ Finish #N** — one-line leftover (issue numbers). Why this beats starting.
 
 ### Occupied
-- **#N** title — other session; leftover in one clause
+- **#N** title — other session (backend, session ID); leftover in one clause
+- **#N** title — stale session (backend, last update); user decides
 
 ### Finish
 - **#N** title — k/m children · leftover **#A**, **#B** · skip **#C** (deferred)
@@ -137,7 +143,8 @@ runtime has it; otherwise a numbered list). Flag one `★`:
 - `★ Finish the recommended leftover` — staff `finish` epics; do not start new
 - `Finish all almost-done` — every `finish` row, one session per epic
 - `Start #N` — only a `start` row, and only if finish is empty or occupied
-- `Write session briefs` — copy-paste first messages for the chosen epics
+- `Write session briefs` — first messages for the chosen epics, then offer to
+  launch them on an available backend
 - `Also run roundup` — land/launch PRs; epic board stays as ranked
 - `Done` — stop; no writes
 
@@ -159,6 +166,13 @@ fresh session:
 - Verify: the repo's required lint / typecheck commands in full, plus test
   commands scoped to touched packages (from the conventions step)
 - First concrete action (read issue X, then the smallest PR)
+
+After the briefs, ask how to send them (interactive multiple-choice if the
+runtime has it). Offer one option per available cloud backend, plus `Copy-paste
+only`. Mark `★` per the default order in BACKENDS.md. On approval, launch one
+session per brief and report backend, session ID or URL, and epic for each.
+Launch nothing the user did not approve, and never two sessions on the same
+epic.
 
 ## Close hygiene (when executing)
 
