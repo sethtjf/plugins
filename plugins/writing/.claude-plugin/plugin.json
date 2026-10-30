@@ -1,8 +1,8 @@
 {
   "name": "writing",
-  "version": "0.1.0",
-  "description": "Seth's writing style: concise, information-dense prose ordered as answer, explanation, then action items, with decisions asked through a multiple-choice tool and a recommended option.",
+  "version": "0.2.0",
+  "description": "Seth's writing style: concise, information-dense prose ordered as answer, explanation, then action items, with decisions asked through a multiple-choice tool and a recommended option, plus a skill that clears open questions the same way.",
   "author": { "name": "Seth" },
   "license": "MIT",
-  "keywords": ["writing", "style", "prose", "editing", "tone"]
+  "keywords": ["writing", "style", "prose", "editing", "tone", "decisions", "questions"]
 }
