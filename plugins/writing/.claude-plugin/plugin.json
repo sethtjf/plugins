@@ -1,0 +1,8 @@
+{
+  "name": "writing",
+  "version": "0.1.0",
+  "description": "Seth's writing style: concise, information-dense prose ordered as answer, explanation, then action items, with decisions asked through a multiple-choice tool and a recommended option.",
+  "author": { "name": "Seth" },
+  "license": "MIT",
+  "keywords": ["writing", "style", "prose", "editing", "tone"]
+}
