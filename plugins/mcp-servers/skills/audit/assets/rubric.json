@@ -1,0 +1,117 @@
+{
+  "rubric_version": "1.0.0",
+  "grades": [
+    { "grade": "A", "min": 90 },
+    { "grade": "B", "min": 80 },
+    { "grade": "C", "min": 70 },
+    { "grade": "D", "min": 60 },
+    { "grade": "F", "min": 0 }
+  ],
+  "cap_score": 69,
+  "per_tool_thresholds": { "pass": 0.9, "partial": 0.5 },
+  "categories": [
+    {
+      "id": "CAT", "title": "Catalog design", "weight": 12,
+      "checks": [
+        { "id": "CAT-1", "weight": 3, "per_tool": false, "title": "Tools shaped around intent, not one per endpoint" },
+        { "id": "CAT-2", "weight": 3, "per_tool": false, "title": "No ambiguous overlap or duplicate names" },
+        { "id": "CAT-3", "weight": 2, "per_tool": false, "title": "Proportionate definition size" },
+        { "id": "CAT-4", "weight": 2, "per_tool": false, "title": "Consistent domain prefixes above 15 tools" },
+        { "id": "CAT-5", "weight": 2, "per_tool": false, "title": "No server-side meta-tool indirection" }
+      ]
+    },
+    {
+      "id": "NAM", "title": "Naming", "weight": 8,
+      "checks": [
+        { "id": "NAM-1", "weight": 3, "per_tool": true, "title": "Name grammar and uniqueness" },
+        { "id": "NAM-2", "weight": 2, "per_tool": false, "title": "One naming convention" },
+        { "id": "NAM-3", "weight": 2, "per_tool": true, "title": "Names state action and object" },
+        { "id": "NAM-4", "weight": 1, "per_tool": true, "title": "Display title set" }
+      ]
+    },
+    {
+      "id": "DSC", "title": "Descriptions", "weight": 14,
+      "checks": [
+        { "id": "DSC-1", "weight": 3, "per_tool": true, "title": "First sentence states purpose in task vocabulary" },
+        { "id": "DSC-2", "weight": 3, "per_tool": false, "title": "Overlapping siblings disambiguated" },
+        { "id": "DSC-3", "weight": 2, "per_tool": true, "title": "Side effects and costs stated" },
+        { "id": "DSC-4", "weight": 2, "per_tool": true, "title": "Tight, filler-free descriptions" },
+        { "id": "DSC-5", "weight": 2, "per_tool": true, "title": "No directives aimed at the model or other tools" },
+        { "id": "DSC-6", "weight": 2, "per_tool": true, "title": "Examples for non-obvious inputs" }
+      ]
+    },
+    {
+      "id": "INP", "title": "Input schemas", "weight": 12,
+      "checks": [
+        { "id": "INP-1", "weight": 3, "per_tool": true, "cap": true, "title": "Valid object input schema" },
+        { "id": "INP-2", "weight": 3, "per_tool": true, "title": "Every property described; identifiers sourced" },
+        { "id": "INP-3", "weight": 2, "per_tool": true, "title": "Constrained types and accurate required list" },
+        { "id": "INP-4", "weight": 2, "per_tool": true, "title": "Model-friendly shapes" },
+        { "id": "INP-5", "weight": 1, "per_tool": true, "title": "Bounded limits with documented defaults" },
+        { "id": "INP-6", "weight": 1, "per_tool": true, "min_version": "2026-07-28", "title": "x-mcp-header only on non-sensitive primitives" }
+      ]
+    },
+    {
+      "id": "OUT", "title": "Outputs and results", "weight": 10,
+      "checks": [
+        { "id": "OUT-1", "weight": 3, "per_tool": true, "title": "outputSchema declared and honored" },
+        { "id": "OUT-2", "weight": 2, "per_tool": true, "title": "Structured results also serialized as text" },
+        { "id": "OUT-3", "weight": 2, "per_tool": true, "title": "Bounded result size" },
+        { "id": "OUT-4", "weight": 2, "per_tool": true, "title": "Results useful to the model" },
+        { "id": "OUT-5", "weight": 1, "per_tool": false, "title": "Content annotations where audience differs" }
+      ]
+    },
+    {
+      "id": "ANN", "title": "Annotations", "weight": 8,
+      "checks": [
+        { "id": "ANN-1", "weight": 3, "per_tool": true, "cap": true, "title": "Accurate readOnlyHint on every tool" },
+        { "id": "ANN-2", "weight": 2, "per_tool": true, "title": "Accurate destructive and idempotent hints" },
+        { "id": "ANN-3", "weight": 2, "per_tool": true, "title": "openWorldHint on external-facing tools" },
+        { "id": "ANN-4", "weight": 1, "per_tool": false, "title": "Annotations from one source of truth" }
+      ]
+    },
+    {
+      "id": "ERR", "title": "Errors", "weight": 8,
+      "checks": [
+        { "id": "ERR-1", "weight": 3, "per_tool": false, "title": "Execution failures use isError results" },
+        { "id": "ERR-2", "weight": 3, "per_tool": false, "title": "Actionable error text" },
+        { "id": "ERR-3", "weight": 2, "per_tool": false, "title": "No internals leaked in errors" }
+      ]
+    },
+    {
+      "id": "LST", "title": "List stability and caching", "weight": 8,
+      "checks": [
+        { "id": "LST-1", "weight": 3, "per_tool": false, "cap": true, "min_version": "2026-07-28", "title": "Tool set does not vary per connection or by side effect" },
+        { "id": "LST-2", "weight": 2, "per_tool": false, "title": "Deterministic order" },
+        { "id": "LST-3", "weight": 2, "per_tool": false, "title": "listChanged declared only when emitted" },
+        { "id": "LST-4", "weight": 1, "per_tool": false, "min_version": "2026-07-28", "title": "ttlMs and cacheScope on list results" }
+      ]
+    },
+    {
+      "id": "AUTH", "title": "Authorization and scopes", "weight": 10,
+      "checks": [
+        { "id": "AUTH-1", "weight": 3, "per_tool": false, "title": "Protected Resource Metadata and 401 challenge" },
+        { "id": "AUTH-2", "weight": 3, "per_tool": false, "cap": true, "title": "Audience validation, no token passthrough" },
+        { "id": "AUTH-3", "weight": 2, "per_tool": false, "title": "Single tool-to-scope map with tiered listing" },
+        { "id": "AUTH-4", "weight": 1, "per_tool": false, "title": "insufficient_scope challenge with all scopes" },
+        { "id": "AUTH-5", "weight": 1, "per_tool": false, "title": "Minimal scopes_supported baseline" }
+      ]
+    },
+    {
+      "id": "STA", "title": "State and handles", "weight": 4,
+      "checks": [
+        { "id": "STA-1", "weight": 2, "per_tool": false, "title": "Explicit handles, no implicit connection state" },
+        { "id": "STA-2", "weight": 2, "per_tool": false, "title": "Opaque, authorized, documented, recoverable handles" }
+      ]
+    },
+    {
+      "id": "SEC", "title": "Security hygiene", "weight": 6,
+      "checks": [
+        { "id": "SEC-1", "weight": 2, "per_tool": false, "title": "Validation beyond the schema" },
+        { "id": "SEC-2", "weight": 2, "per_tool": false, "title": "Timeouts and rate limits" },
+        { "id": "SEC-3", "weight": 1, "per_tool": false, "title": "Untrusted content delimited and attributed" },
+        { "id": "SEC-4", "weight": 1, "per_tool": false, "title": "Secrets from environment or secret store" }
+      ]
+    }
+  ]
+}
