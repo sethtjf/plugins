@@ -26,7 +26,7 @@ On Claude Code 2.1.275 or later, one command inside a session does both:
 | :- | :- | :- |
 | [`mcp-servers`](plugins/mcp-servers) | Audits an MCP server's source against a 48-check best-practices rubric. Returns a 0–100 score, a letter grade, and a located change list. | `/mcp-servers:audit [path]` |
 | [`workflow`](plugins/workflow) | Board open GitHub epics, round up PRs, issues, and agent sessions into one land-and-launch plan, and deliver an item locally. | `/workflow:epics`, `/workflow:roundup`, `/workflow:deliver` |
-| [`writing`](plugins/writing) | Seth's writing style as a skill: 30 rules for concise, information-dense prose, plus a draft-review procedure. | `/writing:style` |
+| [`writing`](plugins/writing) | Seth's writing style as a skill: 30 rules for concise, information-dense prose, plus a draft-review procedure. Clears open questions through the ask-user tool with a recommended option. | `/writing:style`, `/writing:open-questions` |
 
 Plugin skills run as `/<plugin-name>:<skill-name>`.
 

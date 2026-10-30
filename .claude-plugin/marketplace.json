@@ -18,7 +18,7 @@
     {
       "name": "writing",
       "source": "./plugins/writing",
-      "description": "Seth's writing style as a skill: 30 rules for concise, information-dense prose, plus a draft-review procedure that lists each change by rule."
+      "description": "Seth's writing style as a skill (30 rules plus a draft-review procedure), and an open-questions skill that resolves open questions through the ask-user tool with a recommended option."
     }
   ]
 }
