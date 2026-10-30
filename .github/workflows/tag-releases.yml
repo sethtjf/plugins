@@ -1,0 +1,42 @@
+name: tag-releases
+
+# Creates a `<plugin>--v<version>` tag for every plugin version on main
+# that does not have one yet. Runs on every push to main; tags that
+# already exist are skipped, so reruns are no-ops.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tag-releases
+  cancel-in-progress: false
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Tag new plugin versions
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for manifest in plugins/*/.claude-plugin/plugin.json; do
+            name=$(jq -r .name "$manifest")
+            version=$(jq -r .version "$manifest")
+            tag="${name}--v${version}"
+            if git ls-remote --exit-code --tags origin "refs/tags/$tag" >/dev/null; then
+              echo "exists:  $tag"
+              continue
+            fi
+            git tag -a "$tag" -m "$name $version"
+            git push origin "refs/tags/$tag"
+            echo "created: $tag"
+          done
