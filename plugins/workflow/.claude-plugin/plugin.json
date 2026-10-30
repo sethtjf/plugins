@@ -1,7 +1,7 @@
 {
   "name": "workflow",
-  "version": "0.2.0",
-  "description": "Repo work-management skills: board open GitHub epics, and round up PRs, issues, and agent sessions into one land-and-launch plan across Devin, Claude Code cloud, or local agents.",
+  "version": "0.3.0",
+  "description": "Repo work-management skills: board GitHub epics, round up PRs, issues, and agent sessions into one land-and-launch plan, and deliver an item locally through implementer and test-runner subagents.",
   "author": {
     "name": "Seth"
   },
