@@ -1,8 +1,9 @@
 name: tag-releases
 
-# Creates a `<plugin>--v<version>` tag for every plugin version on main
-# that does not have one yet. Runs on every push to main; tags that
-# already exist are skipped, so reruns are no-ops.
+# Creates a `<plugin>--v<version>` tag and a matching GitHub release for
+# every plugin version on main that does not have one yet. Runs on every
+# push to main; tags and releases that already exist are skipped, so
+# reruns are no-ops and missing releases for older tags are backfilled.
 
 on:
   push:
@@ -24,7 +25,9 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Tag new plugin versions
+      - name: Tag and release new plugin versions
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -34,9 +37,23 @@ jobs:
             tag="${name}--v${version}"
             if git ls-remote --exit-code --tags origin "refs/tags/$tag" >/dev/null; then
               echo "exists:  $tag"
+            else
+              git tag -a "$tag" -m "$name $version"
+              git push origin "refs/tags/$tag"
+              echo "created: $tag"
+            fi
+
+            if gh release view "$tag" >/dev/null 2>&1; then
+              echo "exists:  release $tag"
               continue
             fi
-            git tag -a "$tag" -m "$name $version"
-            git push origin "refs/tags/$tag"
-            echo "created: $tag"
+            # Notes: commits that touched this plugin since its previous tag.
+            git fetch --quiet --tags origin
+            prev=$(git tag --list "${name}--v*" --sort=-v:refname | grep -vx "$tag" | head -n1 || true)
+            range="${prev:+$prev..}$tag"
+            notes=$(git log --no-merges --format='- %s (%h)' "$range" -- "plugins/$name")
+            gh release create "$tag" --verify-tag --latest=false \
+              --title "$name $version" \
+              --notes "${notes:-Initial release.}"
+            echo "created: release $tag"
           done
