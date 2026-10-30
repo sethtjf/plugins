@@ -9,6 +9,11 @@
       "name": "mcp-servers",
       "source": "./plugins/mcp-servers",
       "description": "Audits an MCP server's source code against a 48-check best-practices rubric and returns a 0-100 score plus a structured, located change list."
+    },
+    {
+      "name": "workflow",
+      "source": "./plugins/workflow",
+      "description": "Repo work-management skills: board open GitHub epics, decide what to finish versus start, and write session briefs."
     }
   ]
 }

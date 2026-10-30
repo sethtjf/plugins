@@ -185,6 +185,21 @@ if market is not None:
                     f"{d.relative_to(root)}: directory has no entry in marketplace.json"
                 )
 
+# Shared skill references are copied per skill so each skill stays
+# standalone. Every copy of the same file name must match.
+SHARED_REFS = ("BACKENDS.md",)
+for ref in SHARED_REFS:
+    copies = sorted((root / "plugins").glob(f"*/skills/*/references/{ref}"))
+    texts = {c: c.read_bytes() for c in copies}
+    if len(set(texts.values())) > 1:
+        first = copies[0]
+        for c in copies[1:]:
+            if texts[c] != texts[first]:
+                errors.append(
+                    f"{c.relative_to(root)} differs from {first.relative_to(root)}; "
+                    f"copies of {ref} must be identical"
+                )
+
 for e in errors:
     print(f"FAIL: {e}", file=sys.stderr)
 if errors:
