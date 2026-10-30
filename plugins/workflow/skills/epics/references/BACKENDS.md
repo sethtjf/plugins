@@ -12,19 +12,20 @@ If nothing is available, the fallback is copy-paste briefs. That is always avail
 
 ## Backends
 
-| Backend | Present when the session has | Read check | Search sessions | Launch | Follow up |
-| :- | :- | :- | :- | :- | :- |
-| `devin` | tools ending `devin_session_create`, `devin_session_search`, `devin_session_interact` | `devin_session_search` with a narrow query | `devin_session_search` | `devin_session_create` with the brief as the prompt | `devin_session_interact` (get status, send message) |
-| `claude-cloud` | tools ending `create_session`, `list_sessions`, `send_message` from a `claude-code-remote` server (present only inside a Claude Code cloud session) | `list_sessions` with a small `limit` | `list_sessions`, then `get_session` on candidates | `create_session` with the brief as `prompt` and the repo URL as `source_url` | `send_message`, `get_session` |
-| `local-subagent` | the runtime's own subagent tool (Claude Code: `Agent`) | none needed | not applicable | spawn a subagent in this session with the brief | its final report returns to this session |
-| `brief` | always | none | not applicable | print the brief for the user to paste | the user's call |
+| Backend | Present when the session has | Read check | Search sessions | Launch | Follow up | Stop |
+| :- | :- | :- | :- | :- | :- | :- |
+| `devin` | tools ending `devin_session_create`, `devin_session_search`, `devin_session_interact` | `devin_session_search` with a narrow query | `devin_session_search` | `devin_session_create` with the brief as the prompt | `devin_session_interact` (get status, send message) | `devin_session_interact` (terminate or archive) |
+| `claude-cloud` | tools ending `create_session`, `list_sessions`, `send_message` from a `claude-code-remote` server (present only inside a Claude Code cloud session) | `list_sessions` with a small `limit` | `list_sessions`, then `get_session` on candidates | `create_session` with the brief as `prompt` and the repo URL as `source_url` | `send_message`, `get_session` | `interrupt_session` (stop a turn), `archive_session` (end it) |
+| `local-subagent` | the runtime's own subagent tool (Claude Code: `Agent`) | none needed | not applicable | spawn a subagent in this session with the brief | its final report returns to this session | not applicable |
+| `brief` | always | none | not applicable | print the brief for the user to paste | the user's call | not applicable |
 
 Do not add a backend from memory. A row belongs here only after its tool names have been seen in a real session.
 
 ### Backend quirks
 
 - **devin:** search matches exact words in titles and messages, not meaning. Run a few short queries in parallel (`#1743`, the epic's title words, a likely tag such as `epic-1743`), and use the `tags` filter when the repo tags sessions. Search results omit the `devin-` prefix that `devin_session_interact` requires, so add it before follow-up calls.
-- **claude-cloud:** `list_sessions` includes the session running this skill. Exclude it. Results span every repo the account uses, so match on the epic number or title, not on recency.
+- **claude-cloud:** `list_sessions` includes the session running this skill. Exclude it. Results span every repo the account uses, so match on the issue or epic number or title, not on recency.
+- **Branch names:** Devin pushes `devin/*` branches and Claude Code cloud sessions push `claude/*` branches. A PR on one of those branches came from that backend; look for the session ID or URL in the PR body or comments.
 
 ### When a found session occupies an item
 
