@@ -1,6 +1,14 @@
 {
   "name": "sethtjf",
   "description": "Seth's Claude plugins",
-  "owner": { "name": "Seth" },
-  "plugins": []
+  "owner": {
+    "name": "Seth"
+  },
+  "plugins": [
+    {
+      "name": "mcp-servers",
+      "source": "./plugins/mcp-servers",
+      "description": "Audits an MCP server's source code against a 48-check best-practices rubric and returns a 0-100 score plus a structured, located change list."
+    }
+  ]
 }
