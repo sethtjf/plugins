@@ -14,6 +14,11 @@
       "name": "workflow",
       "source": "./plugins/workflow",
       "description": "Repo work-management skills: board GitHub epics, round up PRs, issues, and agent sessions into one land-and-launch plan, and deliver an item locally through implementer and test-runner subagents."
+    },
+    {
+      "name": "writing",
+      "source": "./plugins/writing",
+      "description": "Seth's writing style as a skill: 30 rules for concise, information-dense prose, plus a draft-review procedure that lists each change by rule."
     }
   ]
 }
