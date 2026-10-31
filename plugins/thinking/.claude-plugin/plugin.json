@@ -1,0 +1,8 @@
+{
+  "name": "thinking",
+  "version": "0.1.0",
+  "description": "Skills for how to think about work: an ambition pass that reworks a task along altitude, depth, and range before doing it, and an introspect skill that reviews your history with Claude and interviews you until you can name what you want from it.",
+  "author": { "name": "Seth" },
+  "license": "MIT",
+  "keywords": ["ambition", "reflection", "introspection", "retrospective", "planning", "prompting"]
+}
