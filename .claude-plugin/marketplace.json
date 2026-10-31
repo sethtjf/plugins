@@ -1,29 +1,21 @@
 {
-  "name": "sethtjf",
-  "description": "Seth's Claude plugins",
+  "name": "flow",
+  "description": "Seth's Claude Code plugins: flow for a working session (frame, triage, write, reflect) and mcp-servers for building MCP servers.",
   "owner": {
     "name": "Seth"
   },
   "plugins": [
     {
+      "name": "flow",
+      "source": "./plugins/flow",
+      "category": "productivity",
+      "description": "Skills in session order: frame a task (ambition, decide), triage repo work across agent sessions (roundup, epics), deliver an item locally (deliver), write in Seth's style (style), and reflect on past sessions (introspect)."
+    },
+    {
       "name": "mcp-servers",
       "source": "./plugins/mcp-servers",
-      "description": "Audits an MCP server's source code against a 48-check best-practices rubric and returns a 0-100 score plus a structured, located change list."
-    },
-    {
-      "name": "workflow",
-      "source": "./plugins/workflow",
-      "description": "Repo work-management skills: board GitHub epics, round up PRs, issues, and agent sessions into one land-and-launch plan, and deliver an item locally through implementer and test-runner subagents."
-    },
-    {
-      "name": "thinking",
-      "source": "./plugins/thinking",
-      "description": "How-to-think skills: an ambition pass that reworks a task along altitude, depth, and range before doing it, and introspect, which reviews your history with Claude and interviews you until you can name what you want from it."
-    },
-    {
-      "name": "writing",
-      "source": "./plugins/writing",
-      "description": "Seth's writing style as a skill (30 rules plus a draft-review procedure), and an open-questions skill that resolves open questions through the ask-user tool with a recommended option."
+      "category": "development",
+      "description": "For building MCP servers: audits a server's source code against a 48-check best-practices rubric and returns a 0-100 score plus a structured, located change list."
     }
   ]
 }

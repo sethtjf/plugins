@@ -1,9 +1,9 @@
 ---
-name: open-questions
+name: decide
 description: Clear a set of open questions by answering what you can yourself and asking the user the rest through the ask-user tool (AskUserQuestion or the app's multiple-choice equivalent), 2-4 options each with one recommended. Use when a spec, plan, PR, or conversation has open questions, TBDs, or unresolved decisions, or when asked to "clear", "resolve", or "walk through" open questions.
 ---
 
-# Open Questions
+# Decide
 
 Turn a pile of open questions into recorded decisions. Answer what the evidence answers, default what does not matter, and ask the user only the questions whose answer changes the work, each as a multiple-choice question with one recommended option.
 
