@@ -8,6 +8,10 @@
 #    skill names, and plugin directories missing from marketplace.json.
 # 4. Shared skills: every shared/skills/<skill>/ must exist, byte for byte,
 #    in plugins/code/skills/ and plugins/work/skills/ (scripts/sync-shared.sh).
+# 5. OpenAI configs (ChatGPT and Codex): .agents/plugins/marketplace.json and
+#    plugins/<name>/plugin.json must match what scripts/build-openai.py
+#    generates, and each plugin.json must fit the portable Agent Plugins
+#    schema's top-level rules.
 #
 # Exits non-zero if any step fails. If the `claude` CLI is not installed,
 # steps 1 and 2 are skipped with a warning and step 3 still runs.
@@ -225,6 +229,60 @@ for src in shared/skills/*/; do
   done
 done
 [ "$failed" -eq 0 ] && echo "shared skills match"
+
+# --- 5: OpenAI configs (ChatGPT and Codex) -----------------------------------
+echo
+echo "==> OpenAI configs"
+python3 -I scripts/build-openai.py --check || failed=1
+python3 -I - "$ROOT" <<'PY' || failed=1
+import json
+import re
+import sys
+from pathlib import Path
+
+root = Path(sys.argv[1])
+errors = []
+# Top-level rules from https://agent-plugins.org/schemas/1.0.0/plugin.schema.json
+# (additionalProperties: false; $schema and name required).
+ALLOWED = {"$schema", "name", "version", "description", "author", "homepage",
+           "repository", "license", "keywords", "extensions"}
+NAME = re.compile(r"^(?!.*(?:--|\.\.))[a-z0-9](?:[a-z0-9.-]*[a-z0-9])?$")
+
+market = json.loads((root / ".agents/plugins/marketplace.json").read_text())
+for entry in market.get("plugins", []):
+    where = f".agents/plugins/marketplace.json ({entry.get('name', '?')})"
+    for key in ("name", "source", "policy", "category"):
+        if key not in entry:
+            errors.append(f"{where}: missing {key!r}")
+    path = entry.get("source", {}).get("path", "")
+    pdir = root / path
+    manifest = pdir / "plugin.json"
+    if not manifest.is_file():
+        errors.append(f"{where}: {path}/plugin.json not found")
+        continue
+    data = json.loads(manifest.read_text())
+    rel = manifest.relative_to(root)
+    extra = set(data) - ALLOWED
+    if extra:
+        errors.append(f"{rel}: keys not allowed by the schema: {sorted(extra)}")
+    for key in ("$schema", "name"):
+        if key not in data:
+            errors.append(f"{rel}: missing {key!r}")
+    if not NAME.match(data.get("name", "")) or len(data.get("name", "")) > 64:
+        errors.append(f"{rel}: name {data.get('name')!r} fails the schema pattern")
+    openai = data.get("extensions", {}).get("com.openai", {})
+    skill = openai.get("onboardingSkill")
+    if skill and (not skill.startswith("./") or not (pdir / skill).is_file()):
+        errors.append(f"{rel}: onboardingSkill {skill!r} must be a ./ path that exists")
+    if not (pdir / "skills").is_dir():
+        errors.append(f"{rel}: no skills/ directory for ChatGPT and Codex to load")
+
+for e in errors:
+    print(f"FAIL: {e}", file=sys.stderr)
+if errors:
+    sys.exit(1)
+print("OpenAI manifests pass schema checks")
+PY
 
 echo
 if [ "$failed" -ne 0 ]; then

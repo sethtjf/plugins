@@ -1,0 +1,32 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "reflect",
+  "version": "0.1.0",
+  "description": "Improve your setup from your session history: introspect reviews past chats and Claude Code sessions, shows patterns with counts and quotes, and interviews you until you can name what you want, then extracts principles, a problem list, or a retrospective.",
+  "author": {
+    "name": "sethtjf",
+    "url": "https://github.com/sethtjf"
+  },
+  "homepage": "https://github.com/sethtjf/flowstack",
+  "repository": "https://github.com/sethtjf/flowstack",
+  "license": "MIT",
+  "keywords": [
+    "reflection",
+    "introspection",
+    "retrospective",
+    "session-history",
+    "self-improvement"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Reflect",
+        "shortDescription": "Improve your setup from session history: introspect reviews past chats and Claude Code sessions, shows patterns with counts and quotes, and interviews you until you can name what you want, then extracts it.",
+        "longDescription": "Improve your setup from your session history: introspect reviews past chats and Claude Code sessions, shows patterns with counts and quotes, and interviews you until you can name what you want, then extracts principles, a problem list, or a retrospective.",
+        "developerName": "sethtjf",
+        "category": "Productivity",
+        "websiteURL": "https://github.com/sethtjf/flowstack"
+      }
+    }
+  }
+}
