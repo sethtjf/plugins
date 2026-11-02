@@ -27,8 +27,7 @@ On Claude Code 2.1.275 or later, one command inside a session does both:
 | shared | [`flow`](plugins/flow) | Frame a task, settle open questions with a recommended option, write in Seth's style, and reflect on past sessions. | `/flow:ambition`, `/flow:decide`, `/flow:style`, `/flow:introspect` |
 | code | [`code`](plugins/code) | Board epics, round up PRs, issues, and agent sessions into one land-and-launch plan, and deliver an item locally. Pairs with [pstack](https://github.com/cursor/plugins/tree/main/pstack) for building and verifying code. | `/code:epics`, `/code:roundup`, `/code:deliver` |
 | code | [`mcp-servers`](plugins/mcp-servers) | For building MCP servers. Audits a server's source against a 48-check best-practices rubric and returns a 0–100 score, a letter grade, and a located change list. | `/mcp-servers:audit [path]` |
-
-The work domain (`work`: gather from Slack, email, and calendar, synthesize action items, delegate to cloud sessions with human sign-off) is in progress.
+| work | [`work`](plugins/work) | Set up a task tool of your choice, turn Slack, email, calendar, and meeting notes into action items, delegate them to cloud sessions or a local worker, and sign off on every outward send. | `/work:setup`, `/work:intake`, `/work:roundup`, `/work:projects`, `/work:deliver`, `/work:review` |
 
 Plugin skills run as `/<plugin-name>:<skill-name>`.
 
