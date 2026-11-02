@@ -6,6 +6,7 @@ The knowledge-work mirror of the code workflow. Code starts from filed issues, r
 
 | Skill | Command | Mirrors | Use when |
 | :- | :- | :- | :- |
+| `setup` | `/work:setup` | repo conventions | First run, or "use Linear for my tasks" |
 | `intake` | `/work:intake` | filing issues | "What came in?", "What do I owe people?", start of day |
 | `roundup` | `/work:roundup` | `roundup` | "What's in flight?", "What should I delegate?" |
 | `projects` | `/work:projects` | `epics` | "Which projects are almost done?", "Finish or start next?" |
@@ -23,9 +24,7 @@ The loop: `intake` writes action items to the ledger. `roundup` sorts them into 
 
 ## Setup
 
-1. **Ledger.** Create a private GitHub repo for action items (for example `you/work`). Cloud sessions launch against it. See `skills/*/references/LEDGER.md` for the item shape, labels, and packet format, and for using a Sheet, Slack list, or Markdown file instead.
-2. **`WORK.md`** at the ledger root (optional; `intake` offers to write one): your role, clients and teams, channels and email labels to watch or exclude, who may see what, house style per audience, and batch-approval rules.
-3. **Connectors.** Slack, Gmail, Google Calendar, Granola, and Google Drive. Each skill checks which ones respond and says when a sweep was partial.
+Run `/work:setup` once. It finds every connected tool that can hold tasks and projects (GitHub issues, Google Sheets, a Slack list, a Markdown file, or any other connected tracker), checks each with one read, and asks you to pick one and confirm how its statuses map. It then detects your sources (Slack, Gmail, Google Calendar, Granola, Google Drive) and agent backends and writes everything to `WORK.md` (default `~/.claude/WORK.md`). The other skills read the ledger from there and send you back to `setup` if it is missing. The adapter table and item, status, and packet formats are in `skills/*/references/LEDGER.md`.
 
 Shared skills from the `flow` plugin (`ambition`, `decide`, `style`, `introspect`) are used when installed. Without `decide`, the skills call the runtime's ask-user tool directly.
 

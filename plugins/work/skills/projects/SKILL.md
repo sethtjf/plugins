@@ -14,7 +14,7 @@ Do not close, comment, launch, or write briefs until the user picks. Finish-firs
 
 ## Conventions (resolve first)
 
-- **Ledger** per [references/LEDGER.md](references/LEDGER.md), and `WORK.md` from its root.
+- **Ledger** and `WORK.md` per [references/LEDGER.md](references/LEDGER.md) No `ledger:` block: offer `/work:setup` and stop.
 - **Backends** per [references/BACKENDS.md](references/BACKENDS.md), for finding sessions that already own a project and for launching briefs.
 
 ## Gather (read-only)

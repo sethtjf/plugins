@@ -14,9 +14,9 @@ This is the work-domain mirror of the code `roundup`. It is read-only until the 
 
 ## Conventions (resolve first)
 
-- **Ledger** per [references/LEDGER.md](references/LEDGER.md), and `WORK.md` from its root.
+- **Ledger** and `WORK.md` per [references/LEDGER.md](references/LEDGER.md). No `ledger:` block: offer `/work:setup` and stop.
 - **Sources** per [references/SOURCES.md](references/SOURCES.md). Roundup reads sources only to check whether an item is already done (a later reply in the source thread) or newly urgent.
-- **Backends** per [references/BACKENDS.md](references/BACKENDS.md). Record the one-line result. Cloud sessions launch against the ledger repo.
+- **Backends** per [references/BACKENDS.md](references/BACKENDS.md). Record the one-line result. Cloud sessions launch against the ledger repo when `cloud_access` is `direct`; otherwise they get the brief alone and return the packet in their final message.
 - **Fresh intake**: if the newest `intake` run is older than one working day, say so in the headline and offer `Run intake first` as the first question.
 
 When prompting for decisions, use the interactive multiple-choice tool and mark one option recommended with a one-line why. No such tool: a numbered list with the recommendation first.
@@ -24,8 +24,8 @@ When prompting for decisions, use the interactive multiple-choice tool and mark 
 ## 1. Gather (always a full sweep)
 
 - **Items**: every open `action-item` in the ledger, with labels, comments, and linked sources.
-- **Packets**: every open item labeled `in-review`, and the newest `<!-- work:packet -->` comment on each.
-- **Sessions**: on every backend that can search sessions, list sessions for the ledger repo, most recent first. Say which backends were searched.
+- **Packets**: every open item in `in-review` and the newest `<!-- work:packet -->` on each, plus packets in the final message of finished `return-packet` sessions (copy each to its item and set `in-review`).
+- **Sessions**: on every backend that can search sessions, list sessions that mention ledger items (by item ID, title, or the ledger repo), most recent first. Say which backends were searched.
 - **Done signals**: for each open item with an external requester, one read of the source thread for a later reply from the user that settles it.
 
 ## 2. Build the graph
@@ -61,7 +61,7 @@ For each cloud or scope launch, write a brief that stands alone. The session may
 - The ledger item URL, title, requester, due date, and done-criteria.
 - The source excerpts, each with its link.
 - The output format (email body, Slack reply, doc) and the audience.
-- Where to put the result: a `<!-- work:packet -->` comment on the item in the shape LEDGER.md gives, then label `in-review`. If the session has Gmail, it may also create a Gmail draft and name its ID.
+- Where to put the result: a `<!-- work:packet -->` comment on the item in the shape LEDGER.md gives, then status `in-review`; or, when `cloud_access` is `return-packet`, the packet as the final message. If the session has Gmail, it may also create a Gmail draft and name its ID.
 - The rule: **never send, post, share, invite, or reply to anyone.** Sign-off happens in `review`.
 - A self-check before posting the packet: every factual claim tied to a quoted source, or marked `[UNSOURCED]`.
 

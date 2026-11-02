@@ -11,7 +11,7 @@ Turn raw communication into tracked work. In the code workflow, people file issu
 ## Conventions (resolve first)
 
 - **Ledger**: per [references/LEDGER.md](references/LEDGER.md). State which ledger is in use in the first line of output.
-- **`WORK.md`**: read it from the ledger root if it exists. It names the user's role, teams, clients, channels and labels to watch or exclude, people whose requests always count, quiet senders to ignore, and confidentiality rules. If it does not exist, use the defaults below and offer to write one at the end.
+- **`WORK.md`**: found and read per LEDGER.md; if it has no `ledger:` block, offer `/work:setup` and stop. It names the user's role, teams, clients, channels and labels to watch or exclude, people whose requests always count, quiet senders to ignore, and confidentiality rules. Anything it leaves out uses the defaults below.
 - **Sources**: detect per [references/SOURCES.md](references/SOURCES.md) and record the one-line result.
 - **Window**: the user's statement wins. Otherwise, from the `created_at` of the newest ledger item that `intake` wrote, capped at 7 days. With an empty ledger, the last 24 hours.
 
@@ -73,7 +73,7 @@ Then ask through the ask-user tool (the `decide` skill if installed, otherwise t
 
 ## 4. Write (only after approval)
 
-Create one ledger item per approved action item, with labels `action-item` plus `ready-for-agent` or `ready-for-human`. Add a "new source" comment to each already-tracked item that gained one. Report the created items as a list of links. If `WORK.md` did not exist, offer to write one from what this run learned (channels that produced items, frequent requesters).
+Create one ledger item per approved action item, typed `action-item`, with status `ready-for-agent` or `ready-for-human`. Add a "new source" comment to each already-tracked item that gained one. Report the created items as a list of links. Offer to add what this run learned (channels that produced items, frequent requesters) to `WORK.md`.
 
 ## Rules
 

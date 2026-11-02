@@ -10,12 +10,12 @@ Human sign-off for delegated work. In the code workflow a PR waits for review an
 
 ## Conventions (resolve first)
 
-- **Ledger** per [references/LEDGER.md](references/LEDGER.md), and `WORK.md` from its root (batch rules, house style, audiences).
+- **Ledger** and `WORK.md` per [references/LEDGER.md](references/LEDGER.md) for batch rules, house style, and audiences. No `ledger:` block: offer `/work:setup` and stop.
 - **Sources** per [references/SOURCES.md](references/SOURCES.md). Review needs write access only for the outward action a packet names. If that source is unavailable, the packet stays in review and the user is told why.
 
 ## 1. Collect
 
-Every open item labeled `in-review` (or the items the user named), and the newest packet comment on each. Order by due date, then external before internal. For each, re-read the source thread once: if a newer message changes the ask, mark the packet **stale** and do not offer approve.
+Every open item in `in-review` (or the items the user named), and the newest packet comment on each. Order by due date, then external before internal. For each, re-read the source thread once: if a newer message changes the ask, mark the packet **stale** and do not offer approve.
 
 ## 2. Present
 

@@ -43,7 +43,7 @@ Send the integrated draft and its sources to the `checker`. On any FAIL, re-dele
 Prepare, never send: a Gmail draft on the source thread (`create_draft`), a Slack draft (`slack_send_message_draft`) or the text inline, or a doc in Drive or Claude Docs that is not shared yet. Apply the `style` skill if installed and `WORK.md` does not set a different house style for this audience.
 
 ### 5. Attach the packet
-Post the `<!-- work:packet -->` comment in the shape LEDGER.md gives, with the exact outward action, where the output is prepared, the full output, sources, and the checker's report. Label `in-review`, remove `in-progress`.
+Post the `<!-- work:packet -->` comment in the shape LEDGER.md gives, with the exact outward action, where the output is prepared, the full output, sources, and the checker's report. Set status `in-review`.
 
 ### 6. Report
 Item, output type and location, check result (counts of PASS, FAIL, UNVERIFIED), and the next step: run `review` to sign off.
