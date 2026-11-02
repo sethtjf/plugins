@@ -187,7 +187,7 @@ if market is not None:
 
 # Shared skill references are copied per skill so each skill stays
 # standalone. Every copy of the same file name must match.
-SHARED_REFS = ("BACKENDS.md",)
+SHARED_REFS = ("BACKENDS.md", "LEDGER.md", "SOURCES.md")
 for ref in SHARED_REFS:
     copies = sorted((root / "plugins").glob(f"*/skills/*/references/{ref}"))
     texts = {c: c.read_bytes() for c in copies}
