@@ -2,7 +2,18 @@
   "name": "reflect",
   "version": "0.1.0",
   "description": "Improve your setup from your session history: introspect reviews past chats and Claude Code sessions, shows patterns with counts and quotes, and interviews you until you can name what you want, then extracts principles, a problem list, or a retrospective.",
-  "author": { "name": "Seth" },
+  "author": {
+    "name": "sethtjf",
+    "url": "https://github.com/sethtjf"
+  },
   "license": "MIT",
-  "keywords": ["reflection", "introspection", "retrospective", "session-history", "self-improvement"]
+  "keywords": [
+    "reflection",
+    "introspection",
+    "retrospective",
+    "session-history",
+    "self-improvement"
+  ],
+  "homepage": "https://github.com/sethtjf/flowstack",
+  "repository": "https://github.com/sethtjf/flowstack"
 }
