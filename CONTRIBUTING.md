@@ -42,6 +42,16 @@ Each plugin lives in `plugins/<name>/` and has one entry in `.claude-plugin/mark
 2. **Bump `version` in `plugin.json`.** Installed users keep their cached copy until the version string changes, so an unbumped change never reaches them.
 3. Run `scripts/validate.sh`, update the README row if the description or commands changed, and commit. The merge to `main` tags and releases the new version.
 
+## Update a shared skill
+
+`ambition`, `decide`, and `style` ship in both `code` and `work`. Edit them only in `shared/skills/<skill>/`, then copy them into both plugins and bump both versions:
+
+```bash
+scripts/sync-shared.sh
+```
+
+`scripts/validate.sh` fails if `plugins/code/skills/<skill>/` or `plugins/work/skills/<skill>/` differs from the source.
+
 ## Rules the validator enforces
 
 | Rule | Why |
@@ -53,6 +63,7 @@ Each plugin lives in `plugins/<name>/` and has one entry in `.claude-plugin/mark
 | `license` and `version` set in `plugin.json` | Anthropic's plugin directory rejects plugins without a license. Version drives updates. |
 | No `version` in the marketplace entry | When both are set, `plugin.json` wins without warning. |
 | Skill `name` matches its folder, lowercase letters, digits, and single hyphens, at most 64 chars | [Agent Skills spec](https://agentskills.io/specification). |
+| Shared skill copies match `shared/skills/` | One source, two plugins, no drift. |
 | Marketplace name is not reserved | `claude plugin marketplace add` refuses official Anthropic names such as `claude-plugins-official`. |
 
 ## Test an install locally
@@ -64,7 +75,7 @@ claude plugin marketplace add ./
 ```
 
 ```bash
-claude plugin install <name>@flow
+claude plugin install <name>@sethtjf
 ```
 
-A marketplace added from a local path loads plugin files in place, so edits show up at the next session start or after `/reload-plugins` without a version bump. Remove it with `claude plugin marketplace remove flow` before adding the GitHub copy.
+A marketplace added from a local path loads plugin files in place, so edits show up at the next session start or after `/reload-plugins` without a version bump. Remove it with `claude plugin marketplace remove sethtjf` before adding the GitHub copy.

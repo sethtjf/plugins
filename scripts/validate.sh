@@ -6,6 +6,8 @@
 # 3. Structural checks the CLI does not cover: JSON syntax, `source` paths
 #    that exist, marketplace/plugin.json name agreement, license fields,
 #    skill names, and plugin directories missing from marketplace.json.
+# 4. Shared skills: every shared/skills/<skill>/ must exist, byte for byte,
+#    in plugins/code/skills/ and plugins/work/skills/ (scripts/sync-shared.sh).
 #
 # Exits non-zero if any step fails. If the `claude` CLI is not installed,
 # steps 1 and 2 are skipped with a warning and step 3 still runs.
@@ -206,6 +208,23 @@ if errors:
     sys.exit(1)
 print("structural checks passed")
 PY
+
+# --- 4: shared skills match their source -------------------------------------
+echo
+echo "==> shared skills"
+for src in shared/skills/*/; do
+  [ -d "$src" ] || continue
+  skill="$(basename "$src")"
+  for domain in code work; do
+    dest="plugins/$domain/skills/$skill"
+    if [ ! -d "$dest" ]; then
+      fail "$dest missing; run scripts/sync-shared.sh"
+    elif ! diff -r "${src%/}" "$dest" >/dev/null; then
+      fail "$dest differs from shared/skills/$skill; edit shared/skills/ and run scripts/sync-shared.sh"
+    fi
+  done
+done
+[ "$failed" -eq 0 ] && echo "shared skills match"
 
 echo
 if [ "$failed" -ne 0 ]; then

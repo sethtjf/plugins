@@ -1,5 +1,5 @@
 ---
-name: audit
+name: mcp-audit
 description: Audits an MCP server's source code against a 48-check best-practices rubric and returns a 0-100 score, a letter grade, and a structured list of specific, located changes. Use when asked to grade, review, score, or audit an MCP server, check it against MCP best practices, or find what to fix in its tools, schemas, annotations, errors, or authorization.
 compatibility: Requires python3 (3.9+). Node.js is optional, for extracting the live tool list with the MCP Inspector CLI.
 metadata:
