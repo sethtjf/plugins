@@ -1,6 +1,6 @@
 {
   "name": "sethtjf",
-  "description": "Seth's Claude plugins in two domains: code and work.",
+  "description": "Seth's Claude plugins: code and work for doing tasks, and reflect for improving the setup from session history.",
   "owner": {
     "name": "Seth"
   },
@@ -9,13 +9,19 @@
       "name": "code",
       "source": "./plugins/code",
       "category": "code",
-      "description": "Code workflow: board GitHub epics, round up PRs, issues, and agent sessions into one land-and-launch plan, deliver an item locally, and audit MCP servers you build. Includes the shared skills ambition, decide, style, and introspect."
+      "description": "Code workflow: board GitHub epics, round up PRs, issues, and agent sessions into one land-and-launch plan, deliver an item locally, and audit MCP servers you build. Includes the shared skills ambition, decide, and style."
     },
     {
       "name": "work",
       "source": "./plugins/work",
       "category": "work",
-      "description": "Work workflow: turn Slack, email, calendar, and meeting notes into action items, delegate them to cloud sessions or a local worker, and sign off on every outward send. Includes the shared skills ambition, decide, style, and introspect."
+      "description": "Work workflow: turn Slack, email, calendar, and meeting notes into action items, delegate them to cloud sessions or a local worker, and sign off on every outward send. Includes the shared skills ambition, decide, and style."
+    },
+    {
+      "name": "reflect",
+      "source": "./plugins/reflect",
+      "category": "reflect",
+      "description": "Improve your setup from session history: introspect reviews past chats and Claude Code sessions, shows patterns with counts and quotes, and interviews you until you can name what you want, then extracts it."
     }
   ]
 }

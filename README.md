@@ -1,6 +1,6 @@
 # sethtjf plugins
 
-Seth's personal [Claude Code plugin marketplace](https://code.claude.com/docs/en/plugins/create-marketplace). The marketplace is named `sethtjf`, after its author, so you add `sethtjf/plugins` and install `<plugin>@sethtjf`. Plugins are grouped into two domains, code and work, mirroring how Claude and ChatGPT keep code and work as separate areas of their apps. There are two plugins, `code` and `work`. Each ships the four domain-neutral [shared skills](shared) (`ambition`, `decide`, `style`, `introspect`), so each harness needs only its own plugin.
+Seth's personal [Claude Code plugin marketplace](https://code.claude.com/docs/en/plugins/create-marketplace). The marketplace is named `sethtjf`, after its author, so you add `sethtjf/plugins` and install `<plugin>@sethtjf`. Plugins are grouped into two domains, code and work, mirroring how Claude and ChatGPT keep code and work as separate areas of their apps. `code` and `work` are for doing tasks, and each ships the three domain-neutral [shared skills](shared) (`ambition`, `decide`, `style`), so each harness needs only its own plugin. A third plugin, `reflect`, is for improving the setup itself from session history.
 
 ## Install
 
@@ -26,7 +26,8 @@ On Claude Code 2.1.275 or later, one command inside a session does both:
 | :- | :- | :- | :- |
 | code | [`code`](plugins/code) | Board epics, round up PRs, issues, and agent sessions into one land-and-launch plan, deliver an item locally, and audit MCP servers you build. Pairs with [pstack](https://github.com/cursor/plugins/tree/main/pstack) for building and verifying code. | `/code:epics`, `/code:roundup`, `/code:deliver`, `/code:mcp-audit` |
 | work | [`work`](plugins/work) | Set up a task tool of your choice, turn Slack, email, calendar, and meeting notes into action items, delegate them to cloud sessions or a local worker, and sign off on every outward send. | `/work:setup`, `/work:intake`, `/work:roundup`, `/work:projects`, `/work:deliver`, `/work:review` |
-| both | [shared skills](shared) | Frame a task, settle open questions with a recommended option, write in Seth's style, and reflect on past sessions. Shipped in both plugins from one source in `shared/skills/`. | `/code:ambition` or `/work:ambition`, and likewise `decide`, `style`, `introspect` |
+| both | [shared skills](shared) | Frame a task, settle open questions with a recommended option, and write in Seth's style. Shipped in `code` and `work` from one source in `shared/skills/`. | `/code:ambition` or `/work:ambition`, and likewise `decide`, `style` |
+| reflect | [`reflect`](plugins/reflect) | Review past chats and sessions, find patterns, and interview you until you can name what to change in your setup. | `/reflect:introspect` |
 
 Plugin skills run as `/<plugin-name>:<skill-name>`.
 
@@ -48,7 +49,7 @@ Each `plugins/<name>/skills/<skill>/` folder is also a standalone [Agent Skill](
 
 ```
 .claude-plugin/marketplace.json   marketplace manifest (name: sethtjf)
-plugins/code/, plugins/work/      the two plugins
+plugins/code, work, reflect       the three plugins
 shared/skills/                    the one editable copy of the shared skills
 scripts/sync-shared.sh            copies shared/skills/ into both plugins
 scripts/validate.sh               validation, also run in CI; fails if a copy drifts
@@ -60,7 +61,7 @@ To change a shared skill, edit `shared/skills/<skill>/` and run `scripts/sync-sh
 
 ## Migrating from older plugins
 
-`workflow` and `mcp-servers` became `code`, and the `writing` and `thinking` skills now ship inside both `code` and `work`. Update the marketplace, remove the old plugins, and install the new ones once per machine:
+`workflow` and `mcp-servers` became `code`. `style`, `decide`, and `ambition` now ship inside both `code` and `work`, and `introspect` moved to `reflect`. Update the marketplace, remove the old plugins, and install the new ones once per machine:
 
 ```bash
 claude plugin marketplace update sethtjf
@@ -70,6 +71,7 @@ claude plugin uninstall workflow@sethtjf
 claude plugin uninstall mcp-servers@sethtjf
 claude plugin install code@sethtjf
 claude plugin install work@sethtjf
+claude plugin install reflect@sethtjf
 ```
 
 If you installed `flow@sethtjf` or `mcp-servers@sethtjf` while those existed, uninstall them too. If you added the marketplace under the short-lived name `flow`, run `claude plugin marketplace remove flow` and `claude plugin marketplace add sethtjf/plugins` first.
@@ -79,7 +81,7 @@ If you installed `flow@sethtjf` or `mcp-servers@sethtjf` while those existed, un
 | `/writing:style` | `/code:style` or `/work:style` |
 | `/writing:open-questions` | `/code:decide` or `/work:decide` |
 | `/thinking:ambition` | `/code:ambition` or `/work:ambition` |
-| `/thinking:introspect` | `/code:introspect` or `/work:introspect` |
+| `/thinking:introspect` | `/reflect:introspect` |
 | `/workflow:roundup` | `/code:roundup` |
 | `/workflow:epics` | `/code:epics` |
 | `/workflow:deliver` | `/code:deliver` |

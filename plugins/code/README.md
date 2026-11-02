@@ -1,6 +1,6 @@
 # code
 
-The code domain's workflow: assess epics and issues, round up everything in flight, triage, and delegate to coding agents (Claude Code cloud sessions, Devin, or a local subagent) with human review before anything lands. Building and verifying code inside a session is left to [pstack](https://github.com/cursor/plugins/tree/main/pstack). It also ships the [shared skills](../../shared) (`ambition`, `decide`, `style`, `introspect`) and `mcp-audit` for MCP servers you build.
+The code domain's workflow: assess epics and issues, round up everything in flight, triage, and delegate to coding agents (Claude Code cloud sessions, Devin, or a local subagent) with human review before anything lands. Building and verifying code inside a session is left to [pstack](https://github.com/cursor/plugins/tree/main/pstack). It also ships the [shared skills](../../shared) (`ambition`, `decide`, `style`) and `mcp-audit` for MCP servers you build.
 
 ## Skills
 
@@ -10,7 +10,7 @@ The code domain's workflow: assess epics and issues, round up everything in flig
 | `roundup` | `/code:roundup` | "Review open PRs", "What's in flight?", "Plan attack on the backlog" |
 | `deliver` | `/code:deliver #N` | "Deliver #42", "Implement this here", roundup's local lane, when pstack is not in use |
 | `mcp-audit` | `/code:mcp-audit [path]` | "Audit this MCP server", "Grade the server in `packages/mcp`" |
-| `ambition`, `decide`, `style`, `introspect` | `/code:<skill>` | Shared with `work`; see [shared skills](../../shared) |
+| `ambition`, `decide`, `style` | `/code:<skill>` | Shared with `work`; see [shared skills](../../shared) |
 
 ### roundup and epics
 

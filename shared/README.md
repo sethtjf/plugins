@@ -1,13 +1,12 @@
 # Shared skills
 
-These four skills are domain-neutral, so both the [`code`](../plugins/code) and [`work`](../plugins/work) plugins ship them. This folder is the only copy to edit. After an edit, run `scripts/sync-shared.sh` to copy each skill into both plugins; `scripts/validate.sh` fails if a plugin's copy differs from the source here.
+These three skills are domain-neutral, so both the [`code`](../plugins/code) and [`work`](../plugins/work) plugins ship them. This folder is the only copy to edit. After an edit, run `scripts/sync-shared.sh` to copy each skill into both plugins; `scripts/validate.sh` fails if a plugin's copy differs from the source here.
 
 | Skill | In code | In work | Use when |
 | :- | :- | :- | :- |
 | `ambition` | `/code:ambition` | `/work:ambition` | "Make this more ambitious", "What would a world-class version look like?" |
 | `decide` | `/code:decide` | `/work:decide` | "Clear the open questions" in a spec, plan, or PR |
 | `style` | `/code:style` | `/work:style` | Writing or reviewing prose in Seth's style |
-| `introspect` | `/code:introspect` | `/work:introspect` | "Look back over my sessions", a retrospective |
 
 With both plugins installed, each skill appears twice, once per namespace. The copies are identical, so either command does the same thing.
 
@@ -21,8 +20,4 @@ With both plugins installed, each skill appears twice, once per namespace. The c
 
 **`style`** holds Seth's 30 writing rules (response format, punctuation, voice, structure, precision, code, pushback) and a draft-review procedure that lists each change by rule number. The same rules run as an always-on claude.ai personal preference; the skill is for agents that load skills. Rule 15 names the reader's field (legal technology). Rule numbers are referenced by the review procedure, so renumber both together. Where pstack's `unslop` or `technical-writing` conflict with it, `style` wins.
 
-### Reflect
-
-**`introspect`** finds your history (past-chat tools, Claude Code cloud sessions, a claude.ai export, or local transcripts), shows 6 to 10 patterns with counts and quotes, and runs 3 to 5 interview rounds until you agree with a one-sentence target. It then extracts principles, a problem list, or a written retrospective. History sources are listed in priority order in its Step 1. Unlike pstack's `/reflect`, which tunes the agent, it is about you.
-
-`ambition` and `introspect` started as claude.ai account skills (`ambition-pass` and `introspect`); keep both copies in sync.
+`ambition` started as the claude.ai account skill `ambition-pass`; keep both copies in sync. `introspect` moved to the [`reflect`](../plugins/reflect) plugin.
