@@ -1,29 +1,27 @@
 {
-  "name": "sethtjf",
-  "description": "Seth's Claude plugins",
+  "name": "flow",
+  "description": "Seth's Claude plugins in two domains, code and work, plus flow, the shared skills both use.",
   "owner": {
     "name": "Seth"
   },
   "plugins": [
     {
+      "name": "flow",
+      "source": "./plugins/flow",
+      "category": "shared",
+      "description": "Shared by both domains: frame a task (ambition), settle open questions with a recommended option (decide), write in Seth's style (style), and reflect on past sessions (introspect)."
+    },
+    {
+      "name": "code",
+      "source": "./plugins/code",
+      "category": "code",
+      "description": "Code workflow: board GitHub epics, round up PRs, issues, and agent sessions into one land-and-launch plan, and deliver an item locally through implementer and test-runner subagents."
+    },
+    {
       "name": "mcp-servers",
       "source": "./plugins/mcp-servers",
-      "description": "Audits an MCP server's source code against a 48-check best-practices rubric and returns a 0-100 score plus a structured, located change list."
-    },
-    {
-      "name": "workflow",
-      "source": "./plugins/workflow",
-      "description": "Repo work-management skills: board GitHub epics, round up PRs, issues, and agent sessions into one land-and-launch plan, and deliver an item locally through implementer and test-runner subagents."
-    },
-    {
-      "name": "thinking",
-      "source": "./plugins/thinking",
-      "description": "How-to-think skills: an ambition pass that reworks a task along altitude, depth, and range before doing it, and introspect, which reviews your history with Claude and interviews you until you can name what you want from it."
-    },
-    {
-      "name": "writing",
-      "source": "./plugins/writing",
-      "description": "Seth's writing style as a skill (30 rules plus a draft-review procedure), and an open-questions skill that resolves open questions through the ask-user tool with a recommended option."
+      "category": "code",
+      "description": "For building MCP servers: audits a server's source code against a 48-check best-practices rubric and returns a 0-100 score plus a structured, located change list."
     }
   ]
 }

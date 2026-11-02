@@ -1,0 +1,8 @@
+{
+  "name": "code",
+  "version": "0.4.0",
+  "description": "Code-domain workflow: board GitHub epics, round up PRs, issues, and agent sessions into one land-and-launch plan, and deliver an item locally through implementer and test-runner subagents. Pairs with pstack for building and verifying code.",
+  "author": { "name": "Seth" },
+  "license": "MIT",
+  "keywords": ["github", "issues", "epics", "pull-requests", "planning", "agents", "delegation", "pstack"]
+}

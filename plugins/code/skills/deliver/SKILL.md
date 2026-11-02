@@ -19,8 +19,8 @@ the implementation yourself — decompose the work and delegate each chunk to th
 This skill uses two subagents. Resolve each once, in this order:
 
 1. **Plugin or repo agent**: an agent named `implementer` / `test-runner` (the
-   `workflow` plugin ships both, listed as `workflow:implementer` and
-   `workflow:test-runner`; a repo may define its own in `.claude/agents/`).
+   `code` plugin ships both, listed as `code:implementer` and
+   `code:test-runner`; a repo may define its own in `.claude/agents/`).
    Prefer the repo's own if both exist — it knows the repo's commands.
 2. **Fallback**: the runtime's general-purpose subagent, with the contract below
    pasted at the top of its prompt.

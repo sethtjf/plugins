@@ -11,7 +11,7 @@ The premise: model capability is uneven, and the limiting factor is usually the 
 
 ## When to use
 
-- The user says "make this more ambitious", "go deeper", "raise the bar", "what would a world-class version look like", or invokes this skill by name (`/thinking:ambition`).
+- The user says "make this more ambitious", "go deeper", "raise the bar", "what would a world-class version look like", or invokes this skill by name (`/flow:ambition`).
 - The user hands over a substantial task and asks how to approach it.
 
 Do not run it unprompted on small, well-scoped requests. A one-line email edit does not need an ambition pass.

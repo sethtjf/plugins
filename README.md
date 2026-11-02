@@ -1,33 +1,34 @@
-# sethtjf plugins
+# flow
 
-Seth's personal [Claude Code plugin marketplace](https://code.claude.com/docs/en/plugins/create-marketplace). The marketplace is named `sethtjf`, so every install ID reads `<plugin>@sethtjf`.
+Seth's personal [Claude Code plugin marketplace](https://code.claude.com/docs/en/plugins/create-marketplace). The marketplace and repo are both named `flow`, so you add `sethtjf/flow` and install `<plugin>@flow`. Plugins are grouped into two domains, code and work, mirroring how Claude and ChatGPT keep code and work as separate areas of their apps. `flow` holds the domain-neutral skills both domains use, so each harness installs `flow` plus its domain plugins.
 
 ## Install
 
 Add the marketplace once, then install plugins from it:
 
 ```bash
-claude plugin marketplace add sethtjf/plugins
+claude plugin marketplace add sethtjf/flow
 ```
 
 ```bash
-claude plugin install <plugin>@sethtjf
+claude plugin install <plugin>@flow
 ```
 
 On Claude Code 2.1.275 or later, one command inside a session does both:
 
 ```
-/plugin install <plugin> --marketplace sethtjf/plugins
+/plugin install <plugin> --marketplace sethtjf/flow
 ```
 
 ## Plugins
 
-| Plugin | Description | Slash command |
-| :- | :- | :- |
-| [`mcp-servers`](plugins/mcp-servers) | Audits an MCP server's source against a 48-check best-practices rubric. Returns a 0–100 score, a letter grade, and a located change list. | `/mcp-servers:audit [path]` |
-| [`workflow`](plugins/workflow) | Board open GitHub epics, round up PRs, issues, and agent sessions into one land-and-launch plan, and deliver an item locally. | `/workflow:epics`, `/workflow:roundup`, `/workflow:deliver` |
-| [`thinking`](plugins/thinking) | Rework a task to be more ambitious along altitude, depth, and range before doing it, and review your history with Claude through an interview until you can name what you want from it. | `/thinking:ambition`, `/thinking:introspect` |
-| [`writing`](plugins/writing) | Seth's writing style as a skill: 30 rules for concise, information-dense prose, plus a draft-review procedure. Clears open questions through the ask-user tool with a recommended option. | `/writing:style`, `/writing:open-questions` |
+| Domain | Plugin | Description | Slash commands |
+| :- | :- | :- | :- |
+| shared | [`flow`](plugins/flow) | Frame a task, settle open questions with a recommended option, write in Seth's style, and reflect on past sessions. | `/flow:ambition`, `/flow:decide`, `/flow:style`, `/flow:introspect` |
+| code | [`code`](plugins/code) | Board epics, round up PRs, issues, and agent sessions into one land-and-launch plan, and deliver an item locally. Pairs with [pstack](https://github.com/cursor/plugins/tree/main/pstack) for building and verifying code. | `/code:epics`, `/code:roundup`, `/code:deliver` |
+| code | [`mcp-servers`](plugins/mcp-servers) | For building MCP servers. Audits a server's source against a 48-check best-practices rubric and returns a 0–100 score, a letter grade, and a located change list. | `/mcp-servers:audit [path]` |
+
+The work domain (`work`: gather from Slack, email, and calendar, synthesize action items, delegate to cloud sessions with human sign-off) is in progress.
 
 Plugin skills run as `/<plugin-name>:<skill-name>`.
 
@@ -36,10 +37,10 @@ Plugin skills run as `/<plugin-name>:<skill-name>`.
 Pull the latest marketplace listing and any plugin whose `version` changed:
 
 ```bash
-claude plugin marketplace update sethtjf
+claude plugin marketplace update flow
 ```
 
-Auto-update is off by default for third-party marketplaces. Turn it on in `/plugin` under **Marketplaces**, select `sethtjf`, then **Enable auto-update**.
+Auto-update is off by default for third-party marketplaces. Turn it on in `/plugin` under **Marketplaces**, select `flow`, then **Enable auto-update**.
 
 ## Using a skill without the plugin
 
@@ -48,15 +49,39 @@ Each `plugins/<name>/skills/<skill>/` folder is also a standalone [Agent Skill](
 ## Repo layout
 
 ```
-.claude-plugin/marketplace.json   marketplace manifest (name: sethtjf)
+.claude-plugin/marketplace.json   marketplace manifest (name: flow)
 plugins/<name>/                   one directory per plugin
 scripts/validate.sh               validation, also run in CI
 .github/workflows/validate.yml    runs validate.sh on push and PRs
 ```
 
-The repo is named `plugins` and contains a `plugins/` directory, so on GitHub a plugin lives at `plugins/plugins/<name>`. Inside the repo, every `source` is `./plugins/<name>`.
 
-To add or update a plugin, see [CONTRIBUTING.md](CONTRIBUTING.md).
+Moving from the old `sethtjf` marketplace? See [Migrating from `sethtjf`](#migrating-from-sethtjf). To add or update a plugin, see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Migrating from `sethtjf`
+
+The marketplace was renamed from `sethtjf` to `flow`, `writing` and `thinking` were merged into `flow`, and `workflow` became `code`. Reinstall once per machine:
+
+```bash
+claude plugin marketplace remove sethtjf
+claude plugin marketplace add sethtjf/flow
+claude plugin install flow@flow
+claude plugin install code@flow
+claude plugin install mcp-servers@flow
+```
+
+Then replace any `@sethtjf` keys in `settings.json` (`enabledPlugins`) and dotfiles.
+
+| Old command | New command |
+| :- | :- |
+| `/writing:style` | `/flow:style` |
+| `/writing:open-questions` | `/flow:decide` |
+| `/thinking:ambition` | `/flow:ambition` |
+| `/thinking:introspect` | `/flow:introspect` |
+| `/workflow:roundup` | `/code:roundup` |
+| `/workflow:epics` | `/code:epics` |
+| `/workflow:deliver` | `/code:deliver` |
+| `/mcp-servers:audit` | unchanged |
 
 ## License
 
