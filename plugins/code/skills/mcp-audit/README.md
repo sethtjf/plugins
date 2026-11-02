@@ -22,7 +22,7 @@ The folder `skills/mcp-audit/` is a complete [Agent Skills](https://agentskills.
 
 ## Install
 
-Install the `code` plugin (`claude plugin install code@sethtjf`); see the [code README](../../README.md).
+Install the `code` plugin (`claude plugin install code@flowstack`); see the [code README](../../README.md).
 
 **Skill only:** copy `skills/mcp-audit/` into `~/.claude/skills/` (all projects), `.claude/skills/` (one repo), or the skills directory of any agent that supports the Agent Skills format. Outside the plugin it runs as `/mcp-audit`, so rename the folder and the `name` in `SKILL.md` if that clashes with another skill.
 

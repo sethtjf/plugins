@@ -38,11 +38,11 @@ Both run on `sonnet`. A repo's own `implementer` or `test-runner` in `.claude/ag
 ## Install
 
 ```bash
-claude plugin marketplace add sethtjf/plugins
+claude plugin marketplace add sethtjf/flowstack
 ```
 
 ```bash
-claude plugin install code@sethtjf
+claude plugin install code@flowstack
 ```
 
 **Skill only:** copy any `skills/<skill>/` folder into `~/.claude/skills/`, `.claude/skills/`, or any agent that supports the [Agent Skills](https://agentskills.io/specification) format. Outside the plugin it runs as `/<skill>`.

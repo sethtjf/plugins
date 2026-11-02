@@ -31,7 +31,7 @@ The plugin also ships the [shared skills](../../shared) (`ambition`, `decide`, `
 ## Install
 
 ```bash
-claude plugin install work@sethtjf
+claude plugin install work@flowstack
 ```
 
 **Skill only:** copy any `skills/<name>/` folder into `~/.claude/skills/`. Each carries its own copies of `LEDGER.md`, `SOURCES.md`, and `BACKENDS.md`.
