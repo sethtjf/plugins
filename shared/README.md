@@ -1,17 +1,15 @@
-# flow
+# Shared skills
 
-The domain-neutral skills Seth uses in every session, whether in the code domain (Claude Code, alongside the [`code`](../code) plugin and [pstack](https://github.com/cursor/plugins/tree/main/pstack)) or the work domain (alongside the `work` plugin). Install it next to whichever domain plugin the harness is for.
+These four skills are domain-neutral, so both the [`code`](../plugins/code) and [`work`](../plugins/work) plugins ship them. This folder is the only copy to edit. After an edit, run `scripts/sync-shared.sh` to copy each skill into both plugins; `scripts/validate.sh` fails if a plugin's copy differs from the source here.
 
-## Skills
-
-| Phase | Skill | Command | Use when |
+| Skill | In code | In work | Use when |
 | :- | :- | :- | :- |
-| Frame | `ambition` | `/flow:ambition` | "Make this more ambitious", "What would a world-class version look like?" |
-| Frame | `decide` | `/flow:decide` | "Clear the open questions" in a spec, plan, or PR |
-| Write | `style` | `/flow:style` | Writing or reviewing prose in Seth's style |
-| Reflect | `introspect` | `/flow:introspect` | "Look back over my sessions", a retrospective |
+| `ambition` | `/code:ambition` | `/work:ambition` | "Make this more ambitious", "What would a world-class version look like?" |
+| `decide` | `/code:decide` | `/work:decide` | "Clear the open questions" in a spec, plan, or PR |
+| `style` | `/code:style` | `/work:style` | Writing or reviewing prose in Seth's style |
+| `introspect` | `/code:introspect` | `/work:introspect` | "Look back over my sessions", a retrospective |
 
-Triage and delivery are domain-specific and live in the domain plugins: `/code:roundup`, `/code:epics`, and `/code:deliver` for code.
+With both plugins installed, each skill appears twice, once per namespace. The copies are identical, so either command does the same thing.
 
 ### Frame
 
@@ -28,15 +26,3 @@ Triage and delivery are domain-specific and live in the domain plugins: `/code:r
 **`introspect`** finds your history (past-chat tools, Claude Code cloud sessions, a claude.ai export, or local transcripts), shows 6 to 10 patterns with counts and quotes, and runs 3 to 5 interview rounds until you agree with a one-sentence target. It then extracts principles, a problem list, or a written retrospective. History sources are listed in priority order in its Step 1. Unlike pstack's `/reflect`, which tunes the agent, it is about you.
 
 `ambition` and `introspect` started as claude.ai account skills (`ambition-pass` and `introspect`); keep both copies in sync.
-
-## Install
-
-```bash
-claude plugin marketplace add sethtjf/plugins
-```
-
-```bash
-claude plugin install flow@sethtjf
-```
-
-**Skill only:** copy any `skills/<skill>/` folder into `~/.claude/skills/`, `.claude/skills/`, or any agent that supports the [Agent Skills](https://agentskills.io/specification) format. Outside the plugin it runs as `/<skill>`, so rename the folder and the `name` in `SKILL.md` if that clashes with another skill.

@@ -1,6 +1,6 @@
 # code
 
-The code domain's workflow: assess epics and issues, round up everything in flight, triage, and delegate to coding agents (Claude Code cloud sessions, Devin, or a local subagent) with human review before anything lands. Building and verifying code inside a session is left to [pstack](https://github.com/cursor/plugins/tree/main/pstack). Install it with [`flow`](../flow), which supplies the shared skills (`ambition`, `decide`, `style`, `introspect`).
+The code domain's workflow: assess epics and issues, round up everything in flight, triage, and delegate to coding agents (Claude Code cloud sessions, Devin, or a local subagent) with human review before anything lands. Building and verifying code inside a session is left to [pstack](https://github.com/cursor/plugins/tree/main/pstack). It also ships the [shared skills](../../shared) (`ambition`, `decide`, `style`, `introspect`) and `mcp-audit` for MCP servers you build.
 
 ## Skills
 
@@ -9,6 +9,8 @@ The code domain's workflow: assess epics and issues, round up everything in flig
 | `epics` | `/code:epics` | "What epics are open?", "Finish or start next?" |
 | `roundup` | `/code:roundup` | "Review open PRs", "What's in flight?", "Plan attack on the backlog" |
 | `deliver` | `/code:deliver #N` | "Deliver #42", "Implement this here", roundup's local lane, when pstack is not in use |
+| `mcp-audit` | `/code:mcp-audit [path]` | "Audit this MCP server", "Grade the server in `packages/mcp`" |
+| `ambition`, `decide`, `style`, `introspect` | `/code:<skill>` | Shared with `work`; see [shared skills](../../shared) |
 
 ### roundup and epics
 
@@ -29,6 +31,10 @@ Both detect which agent backends the session can use (Devin through its MCP serv
 
 Both run on `sonnet`. A repo's own `implementer` or `test-runner` in `.claude/agents/` wins; with neither, `deliver` uses a general-purpose subagent with the same contract.
 
+### mcp-audit
+
+**`mcp-audit`** grades an MCP server's source code against a 48-check best-practices rubric and returns a 0–100 score, a letter grade, and a list of changes, each tied to a file and line. It is read-only and never calls the server's tools. Scoring, outputs, and customization are in [`skills/mcp-audit/README.md`](skills/mcp-audit/README.md).
+
 ## Install
 
 ```bash
@@ -36,7 +42,6 @@ claude plugin marketplace add sethtjf/plugins
 ```
 
 ```bash
-claude plugin install flow@sethtjf
 claude plugin install code@sethtjf
 ```
 

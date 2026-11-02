@@ -1,33 +1,21 @@
 {
   "name": "sethtjf",
-  "description": "Seth's Claude plugins in two domains, code and work, plus flow, the shared skills both use.",
+  "description": "Seth's Claude plugins in two domains: code and work.",
   "owner": {
     "name": "Seth"
   },
   "plugins": [
     {
-      "name": "flow",
-      "source": "./plugins/flow",
-      "category": "shared",
-      "description": "Shared by both domains: frame a task (ambition), settle open questions with a recommended option (decide), write in Seth's style (style), and reflect on past sessions (introspect)."
-    },
-    {
       "name": "code",
       "source": "./plugins/code",
       "category": "code",
-      "description": "Code workflow: board GitHub epics, round up PRs, issues, and agent sessions into one land-and-launch plan, and deliver an item locally through implementer and test-runner subagents."
-    },
-    {
-      "name": "mcp-servers",
-      "source": "./plugins/mcp-servers",
-      "category": "code",
-      "description": "For building MCP servers: audits a server's source code against a 48-check best-practices rubric and returns a 0-100 score plus a structured, located change list."
+      "description": "Code workflow: board GitHub epics, round up PRs, issues, and agent sessions into one land-and-launch plan, deliver an item locally, and audit MCP servers you build. Includes the shared skills ambition, decide, style, and introspect."
     },
     {
       "name": "work",
       "source": "./plugins/work",
       "category": "work",
-      "description": "Work workflow: set up a task tool of your choice, turn Slack, email, calendar, and meeting notes into action items, delegate them to cloud sessions or a local worker, and sign off on every outward send in one review queue."
+      "description": "Work workflow: turn Slack, email, calendar, and meeting notes into action items, delegate them to cloud sessions or a local worker, and sign off on every outward send. Includes the shared skills ambition, decide, style, and introspect."
     }
   ]
 }

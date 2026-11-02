@@ -1,8 +1,0 @@
-{
-  "name": "mcp-servers",
-  "version": "0.1.0",
-  "description": "Audits an MCP server's source code against a 48-check best-practices rubric and returns a 0-100 score plus a structured, located change list.",
-  "author": { "name": "Seth" },
-  "license": "MIT",
-  "keywords": ["mcp", "model-context-protocol", "audit", "code-review", "tools"]
-}
