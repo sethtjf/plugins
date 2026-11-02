@@ -1,8 +1,8 @@
 {
   "name": "flow",
   "version": "0.4.0",
-  "description": "Seth's skills for a working session, in order: frame the task (ambition, decide), triage repo work across agent sessions (roundup, epics), deliver an item locally (deliver), write in Seth's style (style), and reflect on past sessions (introspect). Pairs with pstack, which covers building and verifying code.",
+  "description": "Domain-neutral skills used in both code and work sessions: frame a task (ambition), settle open questions with a recommended option (decide), write in Seth's style (style), and reflect on past sessions (introspect).",
   "author": { "name": "Seth" },
   "license": "MIT",
-  "keywords": ["workflow", "planning", "decisions", "ambition", "github", "epics", "writing", "style", "reflection", "pstack"]
+  "keywords": ["planning", "decisions", "ambition", "writing", "style", "reflection", "retrospective"]
 }

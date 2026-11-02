@@ -1,6 +1,6 @@
 {
   "name": "flow",
-  "description": "Seth's Claude Code plugins: flow for a working session (frame, triage, write, reflect) and mcp-servers for building MCP servers.",
+  "description": "Seth's Claude plugins in two domains, code and work, plus flow, the shared skills both use.",
   "owner": {
     "name": "Seth"
   },
@@ -8,13 +8,19 @@
     {
       "name": "flow",
       "source": "./plugins/flow",
-      "category": "productivity",
-      "description": "Skills in session order: frame a task (ambition, decide), triage repo work across agent sessions (roundup, epics), deliver an item locally (deliver), write in Seth's style (style), and reflect on past sessions (introspect)."
+      "category": "shared",
+      "description": "Shared by both domains: frame a task (ambition), settle open questions with a recommended option (decide), write in Seth's style (style), and reflect on past sessions (introspect)."
+    },
+    {
+      "name": "code",
+      "source": "./plugins/code",
+      "category": "code",
+      "description": "Code workflow: board GitHub epics, round up PRs, issues, and agent sessions into one land-and-launch plan, and deliver an item locally through implementer and test-runner subagents."
     },
     {
       "name": "mcp-servers",
       "source": "./plugins/mcp-servers",
-      "category": "development",
+      "category": "code",
       "description": "For building MCP servers: audits a server's source code against a 48-check best-practices rubric and returns a 0-100 score plus a structured, located change list."
     }
   ]

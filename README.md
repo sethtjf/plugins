@@ -1,6 +1,6 @@
 # flow
 
-Seth's personal [Claude Code plugin marketplace](https://code.claude.com/docs/en/plugins/create-marketplace). The marketplace and repo are both named `flow`, so you add `sethtjf/flow` and install `<plugin>@flow`. It holds two plugins: `flow`, the skills Seth reaches for in every working session, and `mcp-servers`, for building MCP servers.
+Seth's personal [Claude Code plugin marketplace](https://code.claude.com/docs/en/plugins/create-marketplace). The marketplace and repo are both named `flow`, so you add `sethtjf/flow` and install `<plugin>@flow`. Plugins are grouped into two domains, code and work, mirroring how Claude and ChatGPT keep code and work as separate areas of their apps. `flow` holds the domain-neutral skills both domains use, so each harness installs `flow` plus its domain plugins.
 
 ## Install
 
@@ -22,10 +22,13 @@ On Claude Code 2.1.275 or later, one command inside a session does both:
 
 ## Plugins
 
-| Plugin | Description | Slash commands |
-| :- | :- | :- |
-| [`flow`](plugins/flow) | Skills in session order: frame a task, triage repo work across agent sessions, deliver an item locally, write in Seth's style, and reflect on past sessions. Pairs with [pstack](https://github.com/cursor/plugins/tree/main/pstack), which covers building and verifying code. | `/flow:ambition`, `/flow:decide`, `/flow:roundup`, `/flow:epics`, `/flow:deliver`, `/flow:style`, `/flow:introspect` |
-| [`mcp-servers`](plugins/mcp-servers) | For building MCP servers. Audits a server's source against a 48-check best-practices rubric and returns a 0–100 score, a letter grade, and a located change list. | `/mcp-servers:audit [path]` |
+| Domain | Plugin | Description | Slash commands |
+| :- | :- | :- | :- |
+| shared | [`flow`](plugins/flow) | Frame a task, settle open questions with a recommended option, write in Seth's style, and reflect on past sessions. | `/flow:ambition`, `/flow:decide`, `/flow:style`, `/flow:introspect` |
+| code | [`code`](plugins/code) | Board epics, round up PRs, issues, and agent sessions into one land-and-launch plan, and deliver an item locally. Pairs with [pstack](https://github.com/cursor/plugins/tree/main/pstack) for building and verifying code. | `/code:epics`, `/code:roundup`, `/code:deliver` |
+| code | [`mcp-servers`](plugins/mcp-servers) | For building MCP servers. Audits a server's source against a 48-check best-practices rubric and returns a 0–100 score, a letter grade, and a located change list. | `/mcp-servers:audit [path]` |
+
+The work domain (`work`: gather from Slack, email, and calendar, synthesize action items, delegate to cloud sessions with human sign-off) is in progress.
 
 Plugin skills run as `/<plugin-name>:<skill-name>`.
 
@@ -57,12 +60,13 @@ Moving from the old `sethtjf` marketplace? See [Migrating from `sethtjf`](#migra
 
 ## Migrating from `sethtjf`
 
-The marketplace was renamed from `sethtjf` to `flow`, and the `writing`, `thinking`, and `workflow` plugins were merged into `flow`. Reinstall once per machine:
+The marketplace was renamed from `sethtjf` to `flow`, `writing` and `thinking` were merged into `flow`, and `workflow` became `code`. Reinstall once per machine:
 
 ```bash
 claude plugin marketplace remove sethtjf
 claude plugin marketplace add sethtjf/flow
 claude plugin install flow@flow
+claude plugin install code@flow
 claude plugin install mcp-servers@flow
 ```
 
@@ -74,9 +78,9 @@ Then replace any `@sethtjf` keys in `settings.json` (`enabledPlugins`) and dotfi
 | `/writing:open-questions` | `/flow:decide` |
 | `/thinking:ambition` | `/flow:ambition` |
 | `/thinking:introspect` | `/flow:introspect` |
-| `/workflow:roundup` | `/flow:roundup` |
-| `/workflow:epics` | `/flow:epics` |
-| `/workflow:deliver` | `/flow:deliver` |
+| `/workflow:roundup` | `/code:roundup` |
+| `/workflow:epics` | `/code:epics` |
+| `/workflow:deliver` | `/code:deliver` |
 | `/mcp-servers:audit` | unchanged |
 
 ## License
