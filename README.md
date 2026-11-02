@@ -1,23 +1,23 @@
-# flow
+# sethtjf plugins
 
-Seth's personal [Claude Code plugin marketplace](https://code.claude.com/docs/en/plugins/create-marketplace). The marketplace and repo are both named `flow`, so you add `sethtjf/flow` and install `<plugin>@flow`. Plugins are grouped into two domains, code and work, mirroring how Claude and ChatGPT keep code and work as separate areas of their apps. `flow` holds the domain-neutral skills both domains use, so each harness installs `flow` plus its domain plugins.
+Seth's personal [Claude Code plugin marketplace](https://code.claude.com/docs/en/plugins/create-marketplace). The marketplace is named `sethtjf`, after its author, so you add `sethtjf/plugins` and install `<plugin>@sethtjf`. Plugins are grouped into two domains, code and work, mirroring how Claude and ChatGPT keep code and work as separate areas of their apps. `flow` holds the domain-neutral skills both domains use, so each harness installs `flow` plus its domain plugins.
 
 ## Install
 
 Add the marketplace once, then install plugins from it:
 
 ```bash
-claude plugin marketplace add sethtjf/flow
+claude plugin marketplace add sethtjf/plugins
 ```
 
 ```bash
-claude plugin install <plugin>@flow
+claude plugin install <plugin>@sethtjf
 ```
 
 On Claude Code 2.1.275 or later, one command inside a session does both:
 
 ```
-/plugin install <plugin> --marketplace sethtjf/flow
+/plugin install <plugin> --marketplace sethtjf/plugins
 ```
 
 ## Plugins
@@ -36,10 +36,10 @@ Plugin skills run as `/<plugin-name>:<skill-name>`.
 Pull the latest marketplace listing and any plugin whose `version` changed:
 
 ```bash
-claude plugin marketplace update flow
+claude plugin marketplace update sethtjf
 ```
 
-Auto-update is off by default for third-party marketplaces. Turn it on in `/plugin` under **Marketplaces**, select `flow`, then **Enable auto-update**.
+Auto-update is off by default for third-party marketplaces. Turn it on in `/plugin` under **Marketplaces**, select `sethtjf`, then **Enable auto-update**.
 
 ## Using a skill without the plugin
 
@@ -48,28 +48,30 @@ Each `plugins/<name>/skills/<skill>/` folder is also a standalone [Agent Skill](
 ## Repo layout
 
 ```
-.claude-plugin/marketplace.json   marketplace manifest (name: flow)
+.claude-plugin/marketplace.json   marketplace manifest (name: sethtjf)
 plugins/<name>/                   one directory per plugin
 scripts/validate.sh               validation, also run in CI
 .github/workflows/validate.yml    runs validate.sh on push and PRs
 ```
 
 
-Moving from the old `sethtjf` marketplace? See [Migrating from `sethtjf`](#migrating-from-sethtjf). To add or update a plugin, see [CONTRIBUTING.md](CONTRIBUTING.md).
+Upgrading from the old plugin names? See [Migrating from older plugins](#migrating-from-older-plugins). To add or update a plugin, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## Migrating from `sethtjf`
+## Migrating from older plugins
 
-The marketplace was renamed from `sethtjf` to `flow`, `writing` and `thinking` were merged into `flow`, and `workflow` became `code`. Reinstall once per machine:
+`writing` and `thinking` were merged into `flow`, and `workflow` became `code`. Update the marketplace, remove the old plugins, and install the new ones once per machine:
 
 ```bash
-claude plugin marketplace remove sethtjf
-claude plugin marketplace add sethtjf/flow
-claude plugin install flow@flow
-claude plugin install code@flow
-claude plugin install mcp-servers@flow
+claude plugin marketplace update sethtjf
+claude plugin uninstall writing@sethtjf
+claude plugin uninstall thinking@sethtjf
+claude plugin uninstall workflow@sethtjf
+claude plugin install flow@sethtjf
+claude plugin install code@sethtjf
+claude plugin install work@sethtjf
 ```
 
-Then replace any `@sethtjf` keys in `settings.json` (`enabledPlugins`) and dotfiles.
+If you added the marketplace under the short-lived name `flow`, run `claude plugin marketplace remove flow` and `claude plugin marketplace add sethtjf/plugins` first.
 
 | Old command | New command |
 | :- | :- |

@@ -25,23 +25,23 @@ The folder `skills/audit/` is a complete [Agent Skills](https://agentskills.io/s
 
 ## Install
 
-**Claude Code, from the `flow` marketplace:**
+**Claude Code, from the `sethtjf` marketplace:**
 
 ```bash
-claude plugin marketplace add sethtjf/flow
+claude plugin marketplace add sethtjf/plugins
 ```
 
 ```bash
-claude plugin install mcp-servers@flow
+claude plugin install mcp-servers@sethtjf
 ```
 
 On Claude Code 2.1.275 or later, one command inside a session does both:
 
 ```
-/plugin install mcp-servers --marketplace sethtjf/flow
+/plugin install mcp-servers --marketplace sethtjf/plugins
 ```
 
-**Claude Code, a single session** from a clone of `sethtjf/flow`:
+**Claude Code, a single session** from a clone of `sethtjf/plugins`:
 
 ```bash
 claude --plugin-dir ./plugins/mcp-servers

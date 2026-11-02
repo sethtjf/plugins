@@ -32,11 +32,11 @@ Triage and delivery are domain-specific and live in the domain plugins: `/code:r
 ## Install
 
 ```bash
-claude plugin marketplace add sethtjf/flow
+claude plugin marketplace add sethtjf/plugins
 ```
 
 ```bash
-claude plugin install flow@flow
+claude plugin install flow@sethtjf
 ```
 
 **Skill only:** copy any `skills/<skill>/` folder into `~/.claude/skills/`, `.claude/skills/`, or any agent that supports the [Agent Skills](https://agentskills.io/specification) format. Outside the plugin it runs as `/<skill>`, so rename the folder and the `name` in `SKILL.md` if that clashes with another skill.

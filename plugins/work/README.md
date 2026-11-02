@@ -31,7 +31,7 @@ Shared skills from the `flow` plugin (`ambition`, `decide`, `style`, `introspect
 ## Install
 
 ```bash
-claude plugin install work@flow
+claude plugin install work@sethtjf
 ```
 
 **Skill only:** copy any `skills/<name>/` folder into `~/.claude/skills/`. Each carries its own copies of `LEDGER.md`, `SOURCES.md`, and `BACKENDS.md`.
