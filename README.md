@@ -41,6 +41,26 @@ claude plugin marketplace update flowstack
 
 Auto-update is off by default for third-party marketplaces. Turn it on in `/plugin` under **Marketplaces**, select `flowstack`, then **Enable auto-update**.
 
+## ChatGPT and Codex
+
+The same plugins install in OpenAI's Codex (CLI, IDE, and desktop app) and the ChatGPT desktop app, from the same `skills/` folders. OpenAI reads `.agents/plugins/marketplace.json` and each plugin's root `plugin.json`, in the portable [Agent Plugins format](https://developers.openai.com/plugins/build/plugins.md). Both are generated from the `.claude-plugin/` manifests by `scripts/build-openai.py`, so never edit them by hand. Add the marketplace:
+
+```bash
+codex plugin marketplace add sethtjf/flowstack
+```
+
+Then install `code`, `work`, or `reflect` from the plugin directory in Codex or the ChatGPT desktop app, and restart the desktop app to pick up changes. To share a plugin with a ChatGPT workspace, a workspace admin publishes it from ChatGPT Plugins, Personal tab ([docs](https://developers.openai.com/codex/plugins/build.md)). In Codex a skill runs as `$<skill>` and in ChatGPT as `@<skill>`, not `/<plugin>:<skill>`. `work` sets `setup` as its onboarding skill, so ChatGPT and Codex run it after install.
+
+Not everything carries over:
+
+| Claude feature | On ChatGPT and Codex |
+| :- | :- |
+| Subagents in `agents/` (`implementer`, `test-runner`, `worker`, `checker`) | No plugin equivalent; the folders are ignored. `/code:deliver` and `/work:deliver` delegate to them, so expect the model to do that work inline. Untested. |
+| `AskUserQuestion` in `ambition`, `decide`, and `style` | Not available. Each skill already falls back to numbered options with the recommended one first. |
+| `~/.claude/` paths | `/reflect:introspect` reads Claude Code session history in `~/.claude/projects/`, which Codex does not write, so it finds nothing to review there. `work` falls back from `~/.claude/WORK.md` to `$WORK_MD` or `./WORK.md`. |
+| MCP servers | No plugin bundles one today, so nothing to translate. A future bundled server needs a root `mcp.json` with a transport `type`, and public listing needs a remote HTTPS endpoint. |
+| Hooks | None shipped. OpenAI runs plugin hooks only for manual installs in the Codex desktop app. |
+
 ## Using a skill without the plugin
 
 Each `plugins/<name>/skills/<skill>/` folder is also a standalone [Agent Skill](https://agentskills.io/specification). Copy it into `~/.claude/skills/` to use it in Claude Code without installing the plugin, or into any agent that supports the Agent Skills format. Outside a plugin the skill runs as `/<skill>` with no plugin prefix.
@@ -49,10 +69,12 @@ Each `plugins/<name>/skills/<skill>/` folder is also a standalone [Agent Skill](
 
 ```
 .claude-plugin/marketplace.json   marketplace manifest (name: flowstack)
-plugins/code, work, reflect       the three plugins
+.agents/plugins/marketplace.json  ChatGPT and Codex marketplace (generated)
+plugins/code, work, reflect       the three plugins; plugin.json at each root is generated for OpenAI
 shared/skills/                    the one editable copy of the shared skills
 scripts/sync-shared.sh            copies shared/skills/ into both plugins
-scripts/validate.sh               validation, also run in CI; fails if a copy drifts
+scripts/build-openai.py           writes the OpenAI manifests from the .claude-plugin ones
+scripts/validate.sh               validation, also run in CI; fails if a copy or OpenAI manifest drifts
 .github/workflows/validate.yml    runs validate.sh on push and PRs
 ```
 
