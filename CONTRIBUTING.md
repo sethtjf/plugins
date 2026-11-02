@@ -75,7 +75,7 @@ claude plugin marketplace add ./
 ```
 
 ```bash
-claude plugin install <name>@sethtjf
+claude plugin install <name>@flowstack
 ```
 
-A marketplace added from a local path loads plugin files in place, so edits show up at the next session start or after `/reload-plugins` without a version bump. Remove it with `claude plugin marketplace remove sethtjf` before adding the GitHub copy.
+A marketplace added from a local path loads plugin files in place, so edits show up at the next session start or after `/reload-plugins` without a version bump. Remove it with `claude plugin marketplace remove flowstack` before adding the GitHub copy.

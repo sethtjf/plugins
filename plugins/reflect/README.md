@@ -15,7 +15,7 @@ It started as the claude.ai account skill `introspect`; keep both copies in sync
 ## Install
 
 ```bash
-claude plugin install reflect@sethtjf
+claude plugin install reflect@flowstack
 ```
 
 **Skill only:** copy `skills/introspect/` into `~/.claude/skills/`. Outside the plugin it runs as `/introspect`.
